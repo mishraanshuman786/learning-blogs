@@ -1,6 +1,6 @@
 <!-- Nodejs Core Modules -->
 
-# What Is the fs Module and How Does It Work?
+# fs Module:
 Node.js lets you do this with the fs or file system module.
 
 The Node fs module provides you with methods for working with files and folders, including opening and closing, reading and writing, and deleting operations.
@@ -274,7 +274,7 @@ Other `Buffer`` methods include:
 `Buffer.compare()`: compares two buffers and returns their sort order     
 `Buffer.concat()`: joins multiple buffers together into one
 
-# What Is the Crypto Module and How Does It Work?
+# Crypto Module
 Crypto is another core module that's built into Node.js. It includes tools for things like hashing, encryption, decryption, and creating digital signatures, all of which are used to protect sensitive information and keep your app secure.
 
 `crypto` gives you low-level building blocks, not plug-and-play security. Writing your own encryption or authentication code can be unsafe if you're not careful. In most cases, it's best to use well-tested libraries like `bcrypt` for password hashing or `jsonwebtoken` (JWT) for handling logins and tokens.
@@ -410,7 +410,7 @@ In addition to these, there are:
 - `createDiffieHellman()` for two parties to generate a shared secret without sending the secret directly
 - `Certificate()` for working with the one used in HTTPS, so you can parse, export, and verify certificate contents
 
-# What Is the os Module and How Does It Work?
+# os Module
 
 The OS module is another standard module that comes built into Node.js.
 
@@ -580,4 +580,194 @@ console.log(os.networkInterfaces());
 };
 */
 ```
+
+# Path Module
+
+The Node.js path module lets you work with files and directory paths. It provides several useful methods for handling and transforming directories, including joining, normalizing, and resolving the directories across different platforms and operating systems.
+
+To use the path module, you can import it like this:
+```
+const path = require("path");
+```
+
+First, you should be aware of the Node.js global variables `__filename` and `__dirname`, AKA "common JS" variables. You don't need the `path` module to access them, which is why they are called global variables.
+
+`__filename` is the absolute path of the current file and `__dirname` is the absolute path of the directory containing the current file.
+
+For example, I have a `script.js` file I'm currently working with. Here's what the two methods return:
+```
+console.log(__filename);
+// /Users/user/Desktop/fCC/script-code/node/node-path/script.js
+
+console.log(__dirname);
+// /Users/user/Desktop/fCC/script-code/node/node-path
+```
+You should also be aware of relative and absolute paths.
+
+A relative path points to a file or folder based on your current working directory. For example, `./assets/src/text-files`.
+
+An absolute path, on the other hand, gives the complete address of a file or folder from the root of your system, such as `/Users/johndoe/projects/app/assets/src/text-files`.
+
+The `basename()` method shows the last part of the file, that is, the filename:
+```
+console.log(path.basename(__filename)); // script.js
+```
+`dirname()` returns the directory name of a path:
+```
+console.log(path.dirname(__dirname)); // node-path
+```
+`extname()` returns the extension of the current file:
+```
+console.log(path.extname(__filename)); // .js
+```
+You can also specify a different file to return the extension of:
+```
+console.log(path.extname('text-files/text1.txt')); // .txt
+```
+
+The `join()` method takes all the path segments you pass in and joins them into one clean, normalized path. 
+
+This could be useful if you want to merge related files in different folders so you can work with them together:
+```
+const joinedPath = path.join("src", "assets", "text-files");
+console.log(joinedPath); // src/assets/text-files
+```
+Windows uses backslashes to separate directories, so the result will be `src\assets\text-files`.
+
+In addition, the `join()` method automatically fixes wrong slashes and removes extra ones:
+```
+const wrongPath = path.join("/src//", "assets", "text-files");
+console.log(wrongPath); // /src/assets/text-files
+```
+
+The `resolve()` method turns a sequence of path segments into an absolute path. It starts from your current working directory and results in a full path that points to the exact location on the device:
+```
+const absolutePath = path.resolve("assets", "src", "text-files");
+console.log(absolutePath);
+// /Users/user/Desktop/fCC/script-code/node/node-path/assets/src/text-files
+```
+
+The difference between `join()` and `resolve()` is that `join()` creates a relative path, while `resolve()` returns an absolute path.
+
+Lastly, there are the `parse()` and `format()` methods.
+
+`parse()` takes a directory or file and returns an object that contains the breakdown of its parts, such as the system root, its directory, extension, and the filename:
+```
+const parsedFile = path.parse(__filename);
+
+console.log(parsedFile);
+/*
+{
+ root: '/',
+ dir: '/Users/user/Desktop/fCC/script-code/node/node-path',
+ base: 'script.js',
+ ext: '.js',
+ name: 'script'
+}
+*/
+```
+
+`format()`, on the other hand, builds a path from an object containing directory, name, and extension:
+
+```
+const formattedDirectory = path.format({
+  dir: "/users/johndoe/docs",
+  name: "file",
+  ext: ".txt",
+});
+
+console.log(formattedDirectory); // /users/johndoe/docs/file.txt
+```
+
+# Process Module
+
+
+`process` is one of the most important Node.js core modules. It gives you access to information about the current Node.js process, and lets you control it while your app is running.
+
+When you execute a command like `node script.js` in the terminal, Node.js starts a process, which is a running instance of the Node program that executes the `script.js` file. This process has its own memory, environment, and execution context. 
+
+The current process is exposed globally through the `process` module, so you don't even need to import it. As long as you have Node.js installed, then you can call it anywhere.
+
+The `process` module exposes properties and methods for you to get certain information about the current execution context.
+
+## process.env
+`process.env` gets you information about the current environment Node is running on. This always returns a giant object with many parameters, so here's how you can access some of the most important information directly:
+
+```
+// Gets all environment variables available to the current Node.js process
+console.log(process.env);
+
+// Gets the current Node.js environment mode (like 'development' or 'production')
+console.log(process.env.NODE_ENV); // development
+
+// Gets the path of the shell program running the Node.js process
+console.log(process.env.SHELL); // /bin/bash
+
+// Gets the system PATH variable where executables are searched for
+console.log(process.env.PATH); // /usr/local/bin:/usr/bin:/bin
+
+// Gets the present working directory from where the process was started
+console.log(process.env.PWD); // /Users/johndoe/projects/myapp
+
+// Gets the username of the user running the current process
+console.log(process.env.USER); // johndoe
+```
+
+`process.argv` lets you read command-line arguments:
+```
+console.log(process.argv);
+/*
+script.js --watch
+Hello world
+[
+  '/Users/user/.nvm/versions/node/v22.17.0/bin/node',
+  '/Users/user/Desktop/fCC/script-code/node/node-process/script.js',
+  '--watch'
+]
+*/
+```
+
+The `cwd()` method shows the current working directory:
+```
+console.log(process.cwd());
+```
+
+### Process events
+Process events are a core feature of Node.js that let your app respond to key moments in its lifecycle, like when it's about to exit, encounters an error, or receives a system signal.
+
+The `exit` event, for example, runs right before the Node.js process finishes:
+```
+process.on("exit", (code) => {
+  console.log(`Process exiting with code: ${code}`);
+});
+
+// Process exiting with code: 0
+```
+
+The `uncaughtException` event is triggered when an error is not caught in your code, which can help you prevent crashes:
+```
+process.on("uncaughtException", (err) => {
+  console.error("Uncaught error:", err.message);
+});
+```
+Lastly, the `warning` event is triggered when Node.js emits a process warning:
+```
+process.on("warning", (warning) => {
+  console.warn("Warning name:", warning.name);
+  console.warn("Warning message:", warning.message);
+});
+```
+
+You can then use the `emitWarning()` method to trigger a custom warning:
+```
+// Example warning with the emitWarning() method
+process.emitWarning('This is a custom warning message', 'CustomWarning');
+
+/*
+  Warning name: CustomWarning
+  Warning message: This is a custom warning message
+*/
+```
+
+# Stream Module
 
