@@ -11,11 +11,11 @@ age = 25
 
 When naming variables in Python, there are some important rules you should keep in mind:
 
-Variable names can only start with a letter or an underscore `(_)`, not a number.
-Variable names can only contain alphanumeric characters `(a-z, A-Z, 0-9)` and underscores `(_)`.
-Variable names are case-sensitive: `age`, `Age`, and `AGE` are all considered unique.
-Variable names cannot be one of Python's reserved keywords such as `if`, `class`, or `def`.
-If you break any of those rules, your Python program will raise a `SyntaxError`:
+- Variable names can only start with a letter or an underscore `(_)`, not a number.
+- Variable names can only contain alphanumeric characters `(a-z, A-Z, 0-9)` and underscores `(_)`.
+- Variable names are case-sensitive: `age`, `Age`, and `AGE` are all considered unique.
+- Variable names cannot be one of Python's reserved keywords such as `if`, `class`, or `def`.
+- If you break any of those rules, your Python program will raise a `SyntaxError`:
 
 ```
  5variable_name = 5
@@ -23,7 +23,7 @@ If you break any of those rules, your Python program will raise a `SyntaxError`:
 SyntaxError: invalid syntax
 ```
 
-First, variable names should be in lowercase, with words separated by an underscore. This is called snake case:
+First, `variable names` should be in `lowercase`, with `words` separated by an `underscore`. This is called `snake case`:
 ```
 my_variable_name = 'freeCodeCamp'
 ```
@@ -134,7 +134,7 @@ my_none_var = None
 print('None:', my_none_var) # None: None
 ```
 
-## type() and instance() function in python
+## type() and isinstance() function in python
  As you build out your programs, you will need to learn how to view the type of a variable.
 
 Here is an example variable:
@@ -582,7 +582,329 @@ title_case_my_str = my_str.title()
 print(title_case_my_str)  # Hello World
 ```
 
+## Assignment: Build an Employee Profile Generator
+This helps in practicing working with `strings` and `string slicing`.
+```
+first_name = 'John'
+last_name = 'Doe'
+full_name = first_name + ' ' + last_name
+address = '123 Main Street'
+address += ', Apartment 4B'
+employee_age = 28
+employee_info = full_name + ' is ' + str(employee_age) + ' years old'
+print(employee_info)
+experience_years = 5
+experience_info = 'Experience: ' + str(experience_years) + ' years'
+print(experience_info)
+position = 'Data Analyst'
+salary = 75000
+employee_card = f'Employee: {full_name} | Age: {employee_age} | Position: {position} | Salary: ${salary}'
+print(employee_card)
+employee_code = 'DEV-2026-JD-001'
+department = employee_code[0:3]
+print(department)
+year_code = employee_code[4:8]
+print(year_code)
+initials = employee_code[9:11]
+print(initials)
+
+```
+# Numbers and Mathematical Operations
+
+## How do you work with Integers and Floating Point Numbers?
+Integers and floats are the primary numeric data types in Python. With them, you can store numeric data and perform mathematical operations.
+
+Integers are whole numbers without decimal points, either positive or negative:
+```
+my_int_1 = 56
+my_int_2 = -4
+
+print(type(my_int_1)) # <class 'int'>
+print(type(my_int_2)) # <class 'int'>
+```
+
+Here's how to perform an addition operation with integers:
+
+```
+my_int_1 = 56
+my_int_2 = 12
+
+sum_ints = my_int_1 + my_int_2
+print('Integer Addition:', sum_ints) # Integer Addition: 68
+```
+Floats are positive or negative numbers with decimal points, like `3.14`, `-0.5`, or `0.0`.
+```
+my_float_1 = -12.0
+my_float_2 = 4.9
+
+print(type(my_float_1)) # <class 'float'>
+print(type(my_float_2)) # <class 'float'>
+```
+
+Here's an addition operation with floats:
+
+```
+my_float_1 = 5.4
+my_float_2 = 12.0
+
+float_addition = my_float_1 + my_float_2
+print('Float Addition:', float_addition) # Float Addition: 17.4
+```
+
+If you add an integer and a float, the result is automatically converted to a float:
+
+```
+my_int = 56
+my_float = 5.4
+
+sum_int_and_float = my_int + my_float
+
+print(sum_int_and_float) # 61.4
+print(type(sum_int_and_float)) # <class 'float'>
+```
+
+This is true for other basic arithmetic operations, too, like subtraction, multiplication, and division. If you mix integers and floats, Python will return a float as the result.
+
+The modulo operator `(%) `returns the remainder when the value on the left is divided by the value on the right:
+```
+my_int_1 = 56
+my_int_2 = 12
+
+my_float_1 = 5.4
+my_float_2 = 12.0
+
+mod_ints = my_int_1 % my_int_2
+mod_floats = my_float_2 % my_float_1
+
+print('Integer Modulo:', mod_ints) # Integer Modulo: 8
+print('Float Modulo:', mod_floats) # Float Modulo: 1.1999999999999993
+```
+
+Floor division divides two numbers and returns the greatest integer less than or equal to the result. This is done with the double forward slash operator `(//)`:
+```
+my_int_1 = 56
+my_int_2 = 12
+
+my_float_1 = 5.4
+my_float_2 = 12.0
+
+floor_div_ints = my_int_1 // my_int_2
+floor_div_floats = my_float_2 // my_float_1
+
+print('Integer Floor Division:', floor_div_ints) # Integer Floor Division: 4
+print('Float Floor Division:', floor_div_floats) # Float Floor Division: 2
+```
+
+`Exponentiation` raises a number to the power of another, and is done with the double asterisk operator (**):
+```
+my_int_1 = 56
+my_int_2 = 12
+
+my_float_1 = 5.4
+my_float_2 = 12.0
+
+exp_ints = my_int_1 ** my_int_2
+exp_floats = my_float_1 ** my_float_2
+
+print('Integer Exponentiation:', exp_ints) # Integer Exponentiation: 951166013805414055936
+print('Float Exponentiation:',  exp_floats) # Float Exponentiation: 614787626.1765089
+```
+
+Sometimes, you might notice that the result of an operation involving floats has more decimal digits than expected. For example, the sum` 0.1 + 0.2` equals `0.30000000000000004` instead of `0.3`.
+
+This happens because numbers are stored in binary format, and some fractions cannot be represented exactly in binary. As a result, they are stored as finite approximations, in the same way the fraction `1/3` cannot be represented with a finite number of digits in decimal and is truncated after a certain number of its infinite digits `(0.33333...)`.
+
+This leads to small rounding errors.
+
+Python also provides built-in functions for converting either numeric data or strings into integers or floats.
+
+The  `float()` function returns a floating-point number constructed from the given number:
+
+```
+my_int_1 = 56
+my_float_1 = float(my_int_1)
+
+print(my_float_1)  # 56.0
+print(type(my_float_1))  # <class 'float'>
+```
+
+The `int()` function returns an integer constructed from the given number:
+
+```
+my_float = 12.92563
+my_int = int(my_float)
+
+print(my_int)  # 12
+print(type(my_int))  # <class 'int'>
+```
+Also, you can use the same built-in functions to convert a string into either a float or integer:
+
+```
+my_str_int = '45'
+my_str_float = '7.8'
+
+converted_int = int(my_str_int)
+converted_float = float(my_str_float)
+
+print(converted_int, type(converted_int))  # 45 <class 'int'>
+print(converted_float, type(converted_float))  # 7.8 <class 'float'>
+```
+
+Here are some other methods Python provides for working with integers and floats.
+
+- `round()`: Rounds a number to the specified number of decimal places. By default this function rounds to the nearest integer, and returns a whole number with no decimal places:
+```
+my_int_1 = 4.798
+my_int_2 = 4.253
+
+rounded_int_1 = round(my_int_1)
+rounded_int_2 = round(my_int_2, 1)
+
+print(rounded_int_1) # 5
+print(rounded_int_2) # 4.3
+```
+
+- `abs()`: returns the absolute value of a number,
+```
+num = -15
+
+absolute_value = abs(num)
+print(absolute_value) # 15
+```
+
+- `pow()`: raises a number to the power of another or performs modular exponentiation.
+
+```
+result_1 = pow(2, 3)  # Equivalent to 2 ** 3
+print(result_1)  # 8
+
+result_2 = pow(2, 3, 5)  # (2 ** 3) % 5
+print(result_2)  # 3
+```
+
+## How Do Augmented Assignments Work?
+
+Augmented assignment applies an operation to a variable and stores the result back in the same variable, all in one step.
+
+The basic syntax of an augmented assignment looks like this:
+```
+variable <operator>= value
+```
+Which is a more efficient way of doing this:
+```
+variable = variable <operator> value
+```
+For example, here's an example of using augmented assignment to add `5` to an existing variable:
+```
+my_var = 10
+my_var += 5
+
+print(my_var) # 15
+```
+
+And here is the same thing, but without augmented assignment:
+```
+my_var = 10
+my_var = my_var + 5
+
+print(my_var) # 15
+```
+
+## Assignment: Buid a Bill Splitor
+- Step 1: In this workshop, you will practice working with numbers and mathematical operations to build a bill splitter. This tool will calculate how much each person owes after adding meal costs and a tip.
+
+To start, you need a way to keep track of the total amount as costs are added.
+
+Create a variable named running_total and assign it the value 0.
+- Step 2: Next, you need to account for the number of people sharing the bill. Store this value in a variable, as you did in the previous step.
+
+Create a variable named `num_of_friends` and assign it the value of `4`. This will be used later in the workshop to calculate the final split.
+
+- Step 3: Each course has a cost. You need to store these amounts in variables to use them later. Since these amounts include cents, you will use the float type, which is used to represent decimal numbers. Here's an example of a variable with a float value:
+```
+change = 2.35
+```
+Create four variables: `appetizers` set to `37.89`, `main_courses` set to `57.34`, `desserts` set to `39.39`, and `drinks` set to `64.21`.
+
+- Step 4: Now that you have stored the individual costs, you can calculate the total.
+
+Recall that the += operator adds a value to an existing variable and updates it at the same time. For example:
+
+```
+total = 10
+total += 2 + 2 + 1
+print(total)  # total is now 15
+```
+
+Use the `+=` operator once to add `appetizers`,` main_courses`, `desserts`, and `drinks` to `running_total`.
+
+Finally, use `print()` to display the string `Total bill so far`: followed by a space and the value of `running_total`.
+
+Note: You might notice that the output has more decimal digits than expected. As you learned in a previous lesson, this happens because numbers are stored in binary, and many decimal values cannot be represented exactly in this format, which leads to rounding errors.
+
+- Step 5: The service was excellent, so the group decides to leave a 25% tip. 
+To calculate a percentage in Python, you can multiply the total by the decimal equivalent of the percentage.
+
+For example, to find 10% of a value, you would multiply it by `0.10` using the `*` operator:
+
+```
+tax = total * 0.10
+```
+Create a variable named `tip` and assign it the result of multiplying `running_total` by `0.25`.
+
+Finally, use `print()` to display the string `Tip amount:` followed by a space and the value of your `tip` variable.
+
+- Step 6: Now that you have calculated the tip, you need to add it to your `running_total` to find the final bill amount.
+
+Use the `+=` operator to add the value of `tip` to your `running_total`. Finally, use `print()` to display the string `Total with tip:` followed by a space and the value of `running_total`.
+
+- Step 7: With the tip now included, you have the final amount for the entire group. You have to determine how much each person owes by dividing the total bill by the number of friends.
+
+In Python, you use the forward slash `/` to perform division. For example:
+
+```
+half = 10 / 2
+```
+Create a variable named `final_bill` and assign it the result of dividing `running_total` by `num_of_friends`.
+
+Finally, use the `print()` function to display the string `Bill per person:` followed by a space and the value of `final_bill`.
+
+- Step 8: The bill is split, but division often results in long decimal numbers. Since money is typically represented with two decimal places, you should round the final result.
+
+In an earlier lesson, you learned about the `round()` function which takes two arguments: the number you want to round and the number of decimal places to keep. Here's an example:
+
+```
+num = 4.815162342
+round(num, 3) # 4.815
+```
+Use the `round()` function to round `final_bill` to two decimal places and assign the result to a new variable named `each_pays`.
+
+Finally, use `print()` to display the string `Each person pays:` followed by a space and your `each_pays` variable.
+
+With that, the bill splitter workshop is complete.
+
+### Solution:
+```
+running_total = 0
+
+num_of_friends = 4
+
+appetizers = 37.89
+main_courses = 57.34
+desserts = 39.39
+drinks = 64.21
+
+running_total += appetizers + main_courses + desserts + drinks
+print('Total bill so far:', running_total)
+
+tip = running_total * 0.25
+print('Tip amount:', tip)
+
+running_total += tip
+print('Total with tip:', running_total)
+
+final_bill = running_total / num_of_friends
+print('Bill per person:', final_bill)
 
 
-
-
+```
